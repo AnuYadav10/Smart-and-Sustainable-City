@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f4;
+    color: #333;
+}
+
+header {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+nav {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a {
+    text-decoration: none;
+    color: #2e7d32;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #1b5e20;
+}
+
+main {
+    width: 85%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+section h2 {
+    color: #2e7d32;
+}
+
+section a {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+section a:hover {
+    background-color: #1b5e20;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+.hero {
+    text-align: center;
+    padding: 40px 25px;
+}
+
+.hero h2 {
+    font-size: 30px;
+}
+
+
+.problem-card {
+    flex: 1;
+    min-width: 180px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.problem-card h3 {
+    color: #2e7d32;
+}
+form {
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1b5e20;
+}
+form {
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control,
+.form-select {
+    border-radius: 5px;
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #1b5e20;
+}
