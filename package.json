@@ -1,0 +1,21 @@
+{
+  "name": "wad-pbl",
+  "version": "1.0.0",
+  "description": "Smart and Sustainable City Citizen Problem Reporting Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "npm --prefix client install && npm --prefix client run build"
+  },
+  "keywords": [
+    "smart-city",
+    "sustainable-city",
+    "citizen-reporting"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
