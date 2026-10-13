@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import './App.css'
 
@@ -219,7 +218,7 @@ function App() {
         <section id="contact">
           <h2>Contact</h2>
           <p>Have a question? Contact us through our existing contact form.</p>
-          <a className="city-button" href="#contact">
+          <a className="city-button" href="/contact.html">
             Contact Us
           </a>
         </section>
