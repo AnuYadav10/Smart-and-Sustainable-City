@@ -1,14 +1,15 @@
-```javascript
+
 const express = require("express");
 const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve existing files during local development
+// Serve files during local development
 if (process.env.NODE_ENV !== "production") {
     app.use(express.static(__dirname));
 }
@@ -20,7 +21,11 @@ let contacts = [];
 let reportId = 1;
 let contactId = 1;
 
+// ==========================================
 // REPORT APIs
+// ==========================================
+
+// CREATE report
 app.post("/api/reports", (req, res) => {
     const { name, email, location, problemType, description, date } = req.body;
 
@@ -40,7 +45,12 @@ app.post("/api/reports", (req, res) => {
 
     const newReport = {
         id: reportId++,
-        name, email, location, problemType, description, date
+        name,
+        email,
+        location,
+        problemType,
+        description,
+        date
     };
 
     reports.push(newReport);
@@ -52,6 +62,7 @@ app.post("/api/reports", (req, res) => {
     });
 });
 
+// READ all reports
 app.get("/api/reports", (req, res) => {
     res.status(200).json({
         success: true,
@@ -60,6 +71,7 @@ app.get("/api/reports", (req, res) => {
     });
 });
 
+// READ one report
 app.get("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const report = reports.find(item => item.id === id);
@@ -74,6 +86,7 @@ app.get("/api/reports/:id", (req, res) => {
     res.status(200).json({ success: true, data: report });
 });
 
+// UPDATE report
 app.put("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const reportIndex = reports.findIndex(item => item.id === id);
@@ -98,6 +111,7 @@ app.put("/api/reports/:id", (req, res) => {
     });
 });
 
+// DELETE report
 app.delete("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const reportIndex = reports.findIndex(item => item.id === id);
@@ -118,7 +132,11 @@ app.delete("/api/reports/:id", (req, res) => {
     });
 });
 
+// ==========================================
 // CONTACT APIs
+// ==========================================
+
+// CREATE contact message
 app.post("/api/contacts", (req, res) => {
     const { name, email, message } = req.body;
 
@@ -129,7 +147,13 @@ app.post("/api/contacts", (req, res) => {
         });
     }
 
-    const newContact = { id: contactId++, name, email, message };
+    const newContact = {
+        id: contactId++,
+        name,
+        email,
+        message
+    };
+
     contacts.push(newContact);
 
     res.status(201).json({
@@ -139,6 +163,7 @@ app.post("/api/contacts", (req, res) => {
     });
 });
 
+// READ all contact messages
 app.get("/api/contacts", (req, res) => {
     res.status(200).json({
         success: true,
@@ -147,6 +172,7 @@ app.get("/api/contacts", (req, res) => {
     });
 });
 
+// UPDATE contact message
 app.put("/api/contacts/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const contactIndex = contacts.findIndex(item => item.id === id);
@@ -171,6 +197,7 @@ app.put("/api/contacts/:id", (req, res) => {
     });
 });
 
+// DELETE contact message
 app.delete("/api/contacts/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const contactIndex = contacts.findIndex(item => item.id === id);
@@ -191,19 +218,40 @@ app.delete("/api/contacts/:id", (req, res) => {
     });
 });
 
+// ==========================================
 // SERVE WEBSITE
+// ==========================================
+
 if (process.env.NODE_ENV === "production") {
     const clientPath = path.join(__dirname, "client", "dist");
 
+    // Serve React build files
     app.use(express.static(clientPath));
 
-    // Serve original Contact page and its stylesheet
+    // Serve original HTML pages
     app.get("/contact.html", (req, res) => {
         res.sendFile(path.join(__dirname, "contact.html"));
     });
 
+    app.get("/report.html", (req, res) => {
+        res.sendFile(path.join(__dirname, "report.html"));
+    });
+
+    app.get("/about.html", (req, res) => {
+        res.sendFile(path.join(__dirname, "about.html"));
+    });
+
+    app.get("/index.html", (req, res) => {
+        res.sendFile(path.join(__dirname, "index.html"));
+    });
+
+    // Serve original CSS and JavaScript
     app.get("/style.css", (req, res) => {
         res.sendFile(path.join(__dirname, "style.css"));
+    });
+
+    app.get("/script.js", (req, res) => {
+        res.sendFile(path.join(__dirname, "script.js"));
     });
 
     // React fallback for other routes
@@ -212,7 +260,7 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
+// START SERVER
 app.listen(PORT, () => {
     console.log("Smart & Sustainable City Server running on port " + PORT);
 });
-```
