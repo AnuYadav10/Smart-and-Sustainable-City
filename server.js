@@ -1,11 +1,10 @@
-
+```javascript
 const express = require("express");
 const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -14,36 +13,18 @@ if (process.env.NODE_ENV !== "production") {
     app.use(express.static(__dirname));
 }
 
-// Temporary in-memory data (no database)
+// Temporary in-memory data
 let reports = [];
 let contacts = [];
 
 let reportId = 1;
 let contactId = 1;
 
-// ==========================================
 // REPORT APIs
-// ==========================================
-
-// CREATE - Add a new report
 app.post("/api/reports", (req, res) => {
-    const {
-        name,
-        email,
-        location,
-        problemType,
-        description,
-        date
-    } = req.body;
+    const { name, email, location, problemType, description, date } = req.body;
 
-    if (
-        !name ||
-        !email ||
-        !location ||
-        !problemType ||
-        !description ||
-        !date
-    ) {
+    if (!name || !email || !location || !problemType || !description || !date) {
         return res.status(400).json({
             success: false,
             message: "All report fields are required."
@@ -59,12 +40,7 @@ app.post("/api/reports", (req, res) => {
 
     const newReport = {
         id: reportId++,
-        name,
-        email,
-        location,
-        problemType,
-        description,
-        date
+        name, email, location, problemType, description, date
     };
 
     reports.push(newReport);
@@ -76,7 +52,6 @@ app.post("/api/reports", (req, res) => {
     });
 });
 
-// READ - Get all reports
 app.get("/api/reports", (req, res) => {
     res.status(200).json({
         success: true,
@@ -85,7 +60,6 @@ app.get("/api/reports", (req, res) => {
     });
 });
 
-// READ - Get one report
 app.get("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const report = reports.find(item => item.id === id);
@@ -97,13 +71,9 @@ app.get("/api/reports/:id", (req, res) => {
         });
     }
 
-    res.status(200).json({
-        success: true,
-        data: report
-    });
+    res.status(200).json({ success: true, data: report });
 });
 
-// UPDATE - Update a report
 app.put("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const reportIndex = reports.findIndex(item => item.id === id);
@@ -128,7 +98,6 @@ app.put("/api/reports/:id", (req, res) => {
     });
 });
 
-// DELETE - Delete a report
 app.delete("/api/reports/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const reportIndex = reports.findIndex(item => item.id === id);
@@ -149,11 +118,7 @@ app.delete("/api/reports/:id", (req, res) => {
     });
 });
 
-// ==========================================
 // CONTACT APIs
-// ==========================================
-
-// CREATE - Add a contact message
 app.post("/api/contacts", (req, res) => {
     const { name, email, message } = req.body;
 
@@ -164,13 +129,7 @@ app.post("/api/contacts", (req, res) => {
         });
     }
 
-    const newContact = {
-        id: contactId++,
-        name,
-        email,
-        message
-    };
-
+    const newContact = { id: contactId++, name, email, message };
     contacts.push(newContact);
 
     res.status(201).json({
@@ -180,7 +139,6 @@ app.post("/api/contacts", (req, res) => {
     });
 });
 
-// READ - Get all contact messages
 app.get("/api/contacts", (req, res) => {
     res.status(200).json({
         success: true,
@@ -189,7 +147,6 @@ app.get("/api/contacts", (req, res) => {
     });
 });
 
-// UPDATE - Update a contact message
 app.put("/api/contacts/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const contactIndex = contacts.findIndex(item => item.id === id);
@@ -214,7 +171,6 @@ app.put("/api/contacts/:id", (req, res) => {
     });
 });
 
-// DELETE - Delete a contact message
 app.delete("/api/contacts/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
     const contactIndex = contacts.findIndex(item => item.id === id);
@@ -235,27 +191,28 @@ app.delete("/api/contacts/:id", (req, res) => {
     });
 });
 
-// ==========================================
-// SERVE REACT WEBSITE IN PRODUCTION
-// ==========================================
-
+// SERVE WEBSITE
 if (process.env.NODE_ENV === "production") {
     const clientPath = path.join(__dirname, "client", "dist");
 
     app.use(express.static(clientPath));
 
+    // Serve original Contact page and its stylesheet
+    app.get("/contact.html", (req, res) => {
+        res.sendFile(path.join(__dirname, "contact.html"));
+    });
+
+    app.get("/style.css", (req, res) => {
+        res.sendFile(path.join(__dirname, "style.css"));
+    });
+
+    // React fallback for other routes
     app.get(/.*/, (req, res) => {
         res.sendFile(path.join(clientPath, "index.html"));
     });
 }
 
-// ==========================================
-// START SERVER
-// ==========================================
-
 app.listen(PORT, () => {
-    console.log("======================================");
-    console.log("Smart & Sustainable City Server");
-    console.log("Server running on port " + PORT);
-    console.log("======================================");
+    console.log("Smart & Sustainable City Server running on port " + PORT);
 });
+```
