@@ -1,3 +1,4 @@
+```jsx
 import { useState, useEffect } from 'react'
 import './App.css'
 
@@ -123,16 +124,37 @@ function App() {
           <h2>Report a City Problem</h2>
           <form onSubmit={handleSubmit}>
             <label>Full Name</label>
-            <input name="name" value={form.name} onChange={handleChange} required />
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
 
             <label>Email</label>
-            <input type="email" name="email" value={form.email} onChange={handleChange} required />
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
 
             <label>Location</label>
-            <input name="location" value={form.location} onChange={handleChange} required />
+            <input
+              name="location"
+              value={form.location}
+              onChange={handleChange}
+              required
+            />
 
             <label>Problem Type</label>
-            <select name="problemType" value={form.problemType} onChange={handleChange} required>
+            <select
+              name="problemType"
+              value={form.problemType}
+              onChange={handleChange}
+              required
+            >
               <option>Road Damage</option>
               <option>Water Problem</option>
               <option>Street Light</option>
@@ -141,10 +163,21 @@ function App() {
             </select>
 
             <label>Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange} required />
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              required
+            />
 
             <label>Date</label>
-            <input type="date" name="date" value={form.date} onChange={handleChange} required />
+            <input
+              type="date"
+              name="date"
+              value={form.date}
+              onChange={handleChange}
+              required
+            />
 
             <button className="city-button" type="submit">
               Submit Report
@@ -173,7 +206,12 @@ function App() {
               ))}
             </div>
           )}
-          <button className="city-button" type="button" onClick={loadReports}>
+
+          <button
+            className="city-button"
+            type="button"
+            onClick={loadReports}
+          >
             Refresh Reports
           </button>
         </section>
@@ -181,17 +219,20 @@ function App() {
         <section id="contact">
           <h2>Contact</h2>
           <p>Have a question? Contact us through our existing contact form.</p>
-          <a className="city-button" href="http://localhost:3000/contact.html">
+          <a className="city-button" href="#contact">
             Contact Us
           </a>
         </section>
       </main>
 
       <footer className="city-footer">
-        <p>Smart &amp; Sustainable City | Citizen Problem Reporting Portal</p>
+        <p>
+          Smart &amp; Sustainable City | Citizen Problem Reporting Portal
+        </p>
       </footer>
     </>
   )
 }
 
 export default App
+```
